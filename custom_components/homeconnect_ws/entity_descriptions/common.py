@@ -190,6 +190,10 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="button_resume_program",
             entity="BSH.Common.Command.ResumeProgram",
         ),
+        HCButtonEntityDescription(
+            key="button_mains_power_off",
+            entity="BSH.Common.Command.MainsPowerOff",
+        ),
     ],
     "binary_sensor": [
         HCBinarySensorEntityDescription(
@@ -228,6 +232,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Event.ProgramAborted",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_program_finished",
+            entity="BSH.Common.Event.ProgramFinished",
+            entity_category=EntityCategory.DIAGNOSTIC,
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
@@ -286,6 +297,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSensorEntityDescription(
             key="sensor_start_in",
             entity="BSH.Common.Option.StartInRelative",
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_finish_in",
+            entity="BSH.Common.Option.FinishInRelative",
             device_class=SensorDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
             suggested_unit_of_measurement=UnitOfTime.HOURS,
@@ -376,6 +394,14 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCNumberEntityDescription(
             key="number_start_in",
             entity="BSH.Common.Option.StartInRelative",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            mode=NumberMode.AUTO,
+            entity_registry_enabled_default=False,
+        ),
+        HCNumberEntityDescription(
+            key="number_finish_in",
+            entity="BSH.Common.Option.FinishInRelative",
             device_class=NumberDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
             mode=NumberMode.AUTO,
